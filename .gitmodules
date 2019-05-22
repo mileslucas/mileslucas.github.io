@@ -1,4 +1,4 @@
 
 [submodule "themes/Flex"]
 	path = themes/Flex
-	url = git@github.com:alexandrevicenzi/Flex
+	url = https://github.com/alexandrevicenzi/Flex
