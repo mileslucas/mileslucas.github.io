@@ -30,7 +30,7 @@ SOCIAL = (('Instagram', 'https://instagram.com/mileslucas_'),
 
 DEFAULT_PAGINATION = 3
 
-THEME = 'pelican-themes/Flex'
+THEME = 'theme'
 
 COPYRIGHT_YEAR = 2019
 
