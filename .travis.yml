@@ -4,7 +4,7 @@ cache: pip
 
 python: 3.7
 
-branches: {only: [master]}
+branches: {only: [src]}
 
 before_install: pip install -U pipenv
 install: pipenv install --system
@@ -16,5 +16,6 @@ deploy:
   github-token: $GITHUB_TOKEN
   keep-history: true
   local-dir: output
+  target_branch: master
   on:
-    branch: master
+    branch: src
