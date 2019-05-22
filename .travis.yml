@@ -1,0 +1,23 @@
+language: python
+
+python: 3.6
+
+branches:
+  only: 
+    - master
+
+before_install:
+  - pip install -U pipenv
+
+install:
+  - pipenv install
+
+script:
+  - pipenv run make publish
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  local-dir: output
