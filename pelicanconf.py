@@ -20,9 +20,9 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 # Blogroll
-LINKS = (('Pelican', 'http://getpelican.com/'),
-         ('Python.org', 'http://python.org/'),
-         ('Jinja2', 'http://jinja.pocoo.org/'),)
+# LINKS = (('Pelican', 'http://getpelican.com/'),
+#          ('Python.org', 'http://python.org/'),
+#          ('Jinja2', 'http://jinja.pocoo.org/'),)
 
 # Social widget
 SOCIAL = (('Instagram', 'https://instagram.com/mileslucas_'),
@@ -30,7 +30,7 @@ SOCIAL = (('Instagram', 'https://instagram.com/mileslucas_'),
 
 DEFAULT_PAGINATION = 3
 
-THEME = 'theme'
+THEME = 'themes/Flex'
 
 COPYRIGHT_YEAR = 2019
 
@@ -47,4 +47,4 @@ COPYRIGHT_YEAR = 2019
 # }
 
 # Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True
+RELATIVE_URLS = True
