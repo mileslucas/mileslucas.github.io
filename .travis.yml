@@ -1,19 +1,15 @@
+dist: xenial
 language: python
+cache: pip
 
-python: 3.6
 
-branches:
-  only: 
-    - master
+python: 3.7
 
-before_install:
-  - pip install -U pipenv
+branches: {only: [master]}
 
-install:
-  - pipenv install
-
-script:
-  - pipenv run make publish
+before_install: pip install -U pipenv
+install: pipenv install --system
+script: make publish
 
 deploy:
   provider: pages
