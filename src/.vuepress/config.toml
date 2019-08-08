@@ -1,0 +1,11 @@
+
+title = "Miles Lucas"
+lang = "en-US"
+
+[[themeConfig.nav]]
+text = "Projects"
+link = "/projects"
+
+[[themeConfig.nav]]
+text = "Photos"
+link = "https://portfolio.mileslucas.com"
