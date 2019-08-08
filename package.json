@@ -4,7 +4,6 @@
     "build": "vuepress build src"
   },
   "dependencies": {
-    "vue-pdf": "^4.0.7",
     "vuepress": "^1.0.2"
   }
 }

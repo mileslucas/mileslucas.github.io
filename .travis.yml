@@ -1,21 +1,20 @@
-language: python
-cache: pip
-
-dist: xenial
-python: 3.7
+language: node_js
 
 branches: {only: [src]}
 
-before_install: pip install -U pipenv
-install: pipenv install --system
-script: make publish
+script: yarn build
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
 
 deploy:
   provider: pages
   skip-cleanup: true
   github-token: $GITHUB_TOKEN
   keep-history: true
-  local-dir: output
+  local-dir: src/.vuepress/dist
   target_branch: master
   on:
     branch: src

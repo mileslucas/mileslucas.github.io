@@ -19,8 +19,6 @@ Outside of research, I enjoy hiking, camping, playing video games, and photograp
 
 [Download link](/CV.pdf)
 
-<PDF/>
-
 ## APOD
 
 I've been featured by [NASA's Astronomy Photo of the Day (APOD) previously](https://apod.nasa.gov/apod/ap180713.html). The picture in question was taken at the Very Large Array (VLA) in New Mexico. I had multiple great opportunities to go out and shoot photos during my research internship with NRAO. Special thanks to Dr. Miller Goss for helping make that photo happen!
