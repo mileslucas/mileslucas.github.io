@@ -1,13 +1,14 @@
 ---toml
 home = true
 tagline = "Writing code to help better understand the universe"
+footer = "Copyright © 2019 Miles Lucas"
 ---
 
 # About Me
 
 ## Biographical Information
 
-I am originally from Denver, Colorado, but spent most of my life growing up in Eastern Iowa. I completed my undergraduate degree in physics with minors in astronomy and computer science at Iowa State University in 2019. Currently I am a PhD student at the Institute for Astronomy at University of Hawai'i.
+I am originally from Denver, Colorado, but spent most of my life growing up in Eastern Iowa. I completed my undergraduate degree in physics with minors in astronomy and computer science at Iowa State University in 2019. Currently I am a PhD student at the Institute for Astronomy at University of Hawai'i Mānoa.
 
 ## Interests
 
