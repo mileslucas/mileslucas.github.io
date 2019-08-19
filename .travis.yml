@@ -17,5 +17,6 @@ deploy:
   keep-history: true
   local-dir: src/.vuepress/dist
   target_branch: master
+  fqdn: mileslucas.com
   on:
     branch: src
