@@ -4,6 +4,7 @@
     "build": "vuepress build src"
   },
   "dependencies": {
+    "browser-pdf-support": "^0.2.0",
     "vue-typed-js": "^0.1.2",
     "vuepress": "^1.0.2"
   }
