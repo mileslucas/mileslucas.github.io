@@ -1,10 +1,12 @@
 ---toml
 home = true
-tagline = "Writing code to help better understand the universe"
+tagline = "Writing code to help better understand our universe."
+bits = []
 footer = "Copyright © 2019 Miles Lucas"
 ---
 
 # About Me
+
 
 ## Biographical Information
 
@@ -17,9 +19,12 @@ I enjoy using programming to solve astronomical problems and provide tools for o
 Outside of research, I enjoy hiking, camping, playing video games, and photography. You can see a selection of some of my favorite photos in [my portfolio](https://portfolio.mileslucas.com).
 
 ## Curriculum Vitae
-
-[Download link](/CV.pdf)
+<CV/>
 
 ## APOD
+
+<a href="https://apod.nasa.gov/apod/ap180713.html">
+    <img src="https://apod.nasa.gov/apod/image/1807/bracewellradiosundial1024.jpg" alt="APOD Photo" style="max-width: 80%; margin-left: auto; margin-right: auto; display: block;">
+</a>
 
 I've been featured by [NASA's Astronomy Photo of the Day (APOD) previously](https://apod.nasa.gov/apod/ap180713.html). The picture in question was taken at the Very Large Array (VLA) in New Mexico. I had multiple great opportunities to go out and shoot photos during my research internship with NRAO. Special thanks to Dr. Miller Goss for helping make that photo happen!
