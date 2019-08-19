@@ -4,7 +4,7 @@
   </object>
 </template>
 
-<style scoped>
+<style lang="stylus">
 #pdf {
   width: 90%;
   height: 40rem;
@@ -12,7 +12,7 @@
   margin-left: auto;
   display: block;
 }
-@media screen and (max-width: 28rem) {
+@media (max-width: $MQMobile) {
   #pdf {
     display: none;
   }
