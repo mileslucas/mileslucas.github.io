@@ -22,7 +22,6 @@ Outside of research, I enjoy hiking, camping, playing video games, and photograp
 
 [Download link](/CV.pdf)
 
-<CV/>
 
 ## APOD
 
