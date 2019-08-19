@@ -1,39 +1,20 @@
 <template>
-  <div v-if="render">
-    <object
-      id="pdf"
-      data="/CV.pdf"
-      type="application/pdf"
-      width="80%"
-      height="600rem"
-      style="
-        
-        "
-    >
-      <embed src="/CV.pdf" />
-    </object>
-  </div>
-  <div v-else>
-    <a href="/CV.pdf">Download link</a>
-  </div>
+  <object id="pdf" data="/CV.pdf" type="application/pdf">
+    <embed src="/CV.pdf" />
+  </object>
 </template>
-
-<script>
-const pdfSupport = require("browser-pdf-support");
-
-export default {
-  data() {
-    return {
-      render: pdfSupport()
-    };
-  }
-};
-</script>
 
 <style scoped>
 #pdf {
+  width: 90%;
+  height: 40rem;
   margin-right: auto;
   margin-left: auto;
   display: block;
+}
+@media screen and (max-width: 28rem) {
+  #pdf {
+    display: none;
+  }
 }
 </style>

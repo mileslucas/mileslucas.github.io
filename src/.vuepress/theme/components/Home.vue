@@ -5,10 +5,9 @@
 
       <h1 v-if="data.heroText !== null" id="main-title">{{ data.heroText || $title || 'Hello' }}</h1>
 
-      <vue-typed-js :strings="data.bits" :loop="true" :backDelay="2000" :typeSpeed="50">
+      <vue-typed-js :strings="data.bits" :loop="false" :typeSpeed="50" :cursorChar="'_'">
         <p class="description">
-          {{ data.tagline || $description || 'Welcome to your VuePress site' }}
-          <span class="typing"></span>
+          $ {{ data.tagline || $description || 'Welcome to your VuePress site' }}<span class="typing"></span>
         </p>
       </vue-typed-js>
       <p class="action" v-if="data.actionText && data.actionLink">
