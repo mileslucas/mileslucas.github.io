@@ -15,15 +15,14 @@
         v-if="$siteTitle"
         :class="{ 'can-hide': $site.themeConfig.logo }"
       >{{ $siteTitle }}</span>
-      <NavLinks class="can-hide" style="margin-left: 20px;" />
     </router-link>
-
     <div
       class="links"
       :style="linksWrapMaxWidth ? {
         'max-width': linksWrapMaxWidth + 'px'
       } : {}"
     >
+      <NavLinks class="can-hide" />
       <AlgoliaSearchBox v-if="isAlgoliaSearch" :options="algolia" />
       <SearchBox
         v-else-if="$site.themeConfig.search !== false && $page.frontmatter.search !== false"
