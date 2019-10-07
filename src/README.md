@@ -14,9 +14,9 @@ I am originally from Denver, Colorado, but spent most of my life growing up in E
 
 ## Interests
 
-I enjoy using programming to solve astronomical problems and provide tools for other astronomers. Some of my research interests include stars, exoplanets, Bayesian analysis, and machine learning.
+I enjoy using programming to solve astronomical problems and provide tools for other astronomers. Some of my research interests include stellar astrophysics, Bayesian analysis, and machine learning.
 
-Outside of research, I enjoy hiking, camping, playing video games, and photography. You can see a selection of some of my favorite photos in [my portfolio](https://portfolio.mileslucas.com).
+Outside of research, I enjoy drumming, hiking, camping, playing video games, and photography. You can see a selection of some of my favorite photos in [my portfolio](https://portfolio.mileslucas.com).
 
 ## Curriculum Vitae
 
