@@ -32,7 +32,7 @@ This is a collaborative effort to create an aperture and PSF photometry package 
 
 ### [NestedSamplers.jl](https://github.com/mileslucas/NestedSamplers.jl)
 
-This is a version of the multi-nest algorithm interfaced with [AbstractMCMC.jl](https://github.com/turinglang/AbstractMCMC.jl). Eventually, this will be plugged into the [Turing.jl](https://github.com/turinglang/Turing.jl) for using this inference method alongside their modeling framework.
+This is a version of the multi-nest algorithm interfaced with [`AbstractMCMC.jl`](https://github.com/turinglang/AbstractMCMC.jl). Eventually, this will be plugged into the [`Turing.jl`](https://github.com/turinglang/Turing.jl) for using this inference method alongside their modeling framework.
 
 ### [Spectra.jl](https://github.com/juliaastro/spectra.jl)
 
