@@ -190,4 +190,4 @@ using LogExpFunctions
  992.485  992.485
 ```
 
-I leave an open challenge to any readers who can get an implementation for a weighted `logsumexp` that matches the quality of the [`logsumexp` implementation in `LogExpFunctions.jl` ](https://github.com/JuliaStats/LogExpFunctions.jl/blob/master/src/logsumexp.jl).
+I leave an open challenge to any readers who can get an implementation for a weighted `logsumexp` that matches the quality of the [`logsumexp` implementation in `LogExpFunctions.jl` ](https://github.com/JuliaStats/LogExpFunctions.jl/blob/master/src/logsumexp.jl). The biggest issues with trying to transcribe the implementation is that `LogExpFunctions.jl` levies `reduce`, which doesn't (currently) take multiple array arguments. Neither does `mapslices`, so a custom loop would have to be written over the indices, as far as I can tell.
