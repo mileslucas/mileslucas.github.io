@@ -1,7 +1,10 @@
 main:
   - name: Projects
-    url: '#about'
+    url: '/projects/'
     weight: 1
   - name: Posts
     url: /posts/
     weight: 2
+  - name: Portfolio
+    url: https://portfolio.mileslucas.com
+    weight: 3
