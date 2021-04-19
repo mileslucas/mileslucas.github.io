@@ -50,4 +50,4 @@ I am originally from Denver, Colorado, but spent most of my life growing up in E
 
 I enjoy using programming to solve astronomical problems and provide tools for other astronomers. Check out some of the code I've written at in my [projects](/projects/). Some of my research interests include stellar astrophysics, Bayesian analysis, and machine learning. I have recently become very interested in high-contrast imaging (HCI), which pushes the limits of our best telescopes and statistical methods to image planets around other stars.
 
-Outside of research, I enjoy drumming, hiking, camping, playing video games, and photography. You can see a selection of some of my favorite photos in my [portfolio](https://portfolio.mileslucas.com/).
+Outside of research, I enjoy drumming, hiking, camping, playing video games, and photography. You can see a selection of some of my favorite photos in my [portfolio](https://portfolio.mileslucas.com/). I've even been featured in NASA's Astronomy Photo of the Day (APOD) for [this star trails photo](https://apod.nasa.gov/apod/ap180713.html) at the Very Large Array (VLA).
