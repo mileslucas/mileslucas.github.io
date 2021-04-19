@@ -1,6 +1,6 @@
 main:
   - name: Projects
-    url: '/projects/'
+    url: '/projects/index.html'
     weight: 1
   - name: Posts
     url: /posts/
