@@ -1,3 +1,9 @@
+---
+title:
+date: 2021-04-19T02:15:11-05:00
+draft: false
+---
+
 # Projects
 
 I am a fairly active open-source developer on [GitHub](https://github.com/mileslucas). Most of my projects are related to astronomy in some way and I typically code in [Julia](https://julialang.org) and [Python](https://www.python.org). Below are some projects I feel like highlighting.

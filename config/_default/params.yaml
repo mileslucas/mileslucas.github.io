@@ -2,20 +2,20 @@ mainSections:
   - posts
 description: Home page of Miles Lucas.
 
-repoEditURL: https://github.com/mileslucas/mileslucas.github.io
+repoEditURL:
 
 dateFormat: 2006-01-02
 
 titleSeparator:
 
 # Options: auto, light and dark. Default is auto.
-colorScheme:
+colorScheme: light
 
 # E.g. Person, Organization, LocalBusiness, Project, EducationalOrganization
 siteType: Person
 icon: images/icon.png
 publisherName: Miles Lucas
-publisherLogo:
+publisherLogo: images/logo.png
 
 highlight:
   handler: highlightjs
