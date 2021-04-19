@@ -1,0 +1,132 @@
+<!doctype html><html lang=en><meta charset=utf-8><meta name=viewport content="width=device-width"><title>Developing a Single-Pass Weighted LogSumExp Function | Miles Lucas</title><meta name=generator content="Hugo Eureka 0.7.1-dev"><link rel=stylesheet href=/css/eureka.min.css><script defer src=/js/eureka.min.js></script><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" as=style onload="this.onload=null,this.rel='stylesheet'"><link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css media=print onload="this.media='all',this.onload=null" crossorigin><script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js crossorigin></script><script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/languages/python.min.js crossorigin></script><script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/languages/julia.min.js crossorigin></script><script defer src=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js integrity="sha256-uNYoXefWRqv+PsIF/OflNmwtKM4lStn9yrz2gVl6ymo=" crossorigin></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css integrity=sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X media=print onload="this.media='all',this.onload=null" crossorigin><script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js integrity=sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4 crossorigin></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js integrity=sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa crossorigin></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script><script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js integrity="sha256-Zmpaaj+GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE=" crossorigin></script><link rel=icon type=image/png sizes=32x32 href=/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_32x32_fill_box_center_2.png><link rel=apple-touch-icon sizes=180x180 href=/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_180x180_fill_box_center_2.png><meta name=description content="Recently I&rsquo;ve been thinking about the LogSumExp trick since it is used in the integration step of nested sampling. I won&rsquo;t go over too much of the math here, but the reason this trick exists is to greatly increase the numerical stability of the operation
+$$ \log \sum_i \exp x_i $$
+via the identity
+$$ a + \log \sum_i \exp\left(x_i - a\right) $$
+Naive implementations In Julia we can implement a naive logsumexp with
+logsumexp_naive(X) = log(sum(exp, X))  let&rsquo;s test the numerical accuracy against Julia&rsquo;s BigFloat for some very large numbers"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"/posts/"},{"@type":"ListItem","position":2,"name":"Developing a Single-Pass Weighted LogSumExp Function","item":"/posts/weighted-logsumexp/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/weighted-logsumexp/"},"headline":"Developing a Single-Pass Weighted LogSumExp Function | Miles Lucas","datePublished":"2021-04-19T00:06:19-05:00","dateModified":"2021-04-19T00:06:19-05:00","wordCount":589,"publisher":{"@type":"Person","name":"Miles Lucas","logo":{"@type":"ImageObject","url":"/images/logo.png"}},"description":"Recently I\u0026rsquo;ve been thinking about the LogSumExp trick since it is used in the integration step of nested sampling. I won\u0026rsquo;t go over too much of the math here, but the reason this trick exists is to greatly increase the numerical stability of the operation\n$$ \\log \\sum_i \\exp x_i $$\nvia the identity\n$$ a \u002b \\log \\sum_i \\exp\\left(x_i - a\\right) $$\nNaive implementations In Julia we can implement a naive logsumexp with\nlogsumexp_naive(X) = log(sum(exp, X))  let\u0026rsquo;s test the numerical accuracy against Julia\u0026rsquo;s BigFloat for some very large numbers"}</script><meta property="og:title" content="Developing a Single-Pass Weighted LogSumExp Function | Miles Lucas"><meta property="og:type" content="article"><meta property="og:image" content="/images/icon.png"><meta property="og:url" content="/posts/weighted-logsumexp/"><meta property="og:description" content="Recently I&rsquo;ve been thinking about the LogSumExp trick since it is used in the integration step of nested sampling. I won&rsquo;t go over too much of the math here, but the reason this trick exists is to greatly increase the numerical stability of the operation
+$$ \log \sum_i \exp x_i $$
+via the identity
+$$ a + \log \sum_i \exp\left(x_i - a\right) $$
+Naive implementations In Julia we can implement a naive logsumexp with
+logsumexp_naive(X) = log(sum(exp, X))  let&rsquo;s test the numerical accuracy against Julia&rsquo;s BigFloat for some very large numbers"><meta property="og:locale" content="en"><meta property="og:site_name" content="Miles Lucas"><meta property="article:published_time" content="2021-04-19T00:06:19-05:00"><meta property="article:modified_time" content="2021-04-19T00:06:19-05:00"><meta property="article:section" content="posts"><body class="flex flex-col min-h-screen"><header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm"><div class="w-full max-w-screen-xl mx-auto"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");(storageColorScheme=='Auto'&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName('html')[0].classList.add('dark')</script><nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0"><a href=/ class="mr-6 text-primary-text text-xl font-bold">Miles Lucas</a>
+<button id=navbar-btn class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+<i class="fas fa-bars"></i></button><div id=target class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20"><div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0"><a href=/projects/index.html class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">Projects</a>
+<a href=/posts/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 selected-menu-item mr-4">Posts</a>
+<a href=https://portfolio.mileslucas.com class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">Portfolio</a></div><div class=flex><div class="relative pt-4 md:pt-0"><div class="cursor-pointer hover:text-eureka" id=lightDarkMode><i class="fas fa-sun"></i></div><div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open></div><div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions><span class="px-4 py-1 hover:text-eureka" name=Light>Light</span>
+<span class="px-4 py-1 hover:text-eureka" name=Dark>Dark</span>
+<span class="px-4 py-1 hover:text-eureka" name=Auto>Auto</span></div></div></div></div><div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile></div></nav><script>let element=document.getElementById('lightDarkMode');storageColorScheme=='Auto'?(element.firstElementChild.classList.remove('fa-sun'),element.firstElementChild.setAttribute("data-icon",'adjust'),element.firstElementChild.classList.add('fa-adjust'),document.addEventListener('DOMContentLoaded',()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change',switchDarkMode)})):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove('fa-sun'),element.firstElementChild.setAttribute("data-icon",'moon'),element.firstElementChild.classList.add('fa-moon')),document.addEventListener('DOMContentLoaded',()=>{getcolorscheme(),switchBurger()})</script></div></header><main class="flex-grow pt-16"><div class=pl-scrollbar><div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto"><div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12"><div class="col-span-2 lg:col-start-2 lg:col-span-6 bg-secondary-bg rounded px-6 py-8"><h1 class="font-bold text-3xl text-primary-text">Developing a Single-Pass Weighted LogSumExp Function</h1><div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text"><div class="mr-6 my-2"><i class="fas fa-calendar mr-1"></i>
+<span>2021-04-19</span></div><div class="mr-6 my-2"><i class="fas fa-clock mr-1"></i>
+<span>3 min read</span></div></div><div class=content><p>Recently I&rsquo;ve been thinking about the <a href=https://en.wikipedia.org/wiki/LogSumExp>LogSumExp</a> trick since it is used in the <a href>integration step of nested sampling</a>. I won&rsquo;t go over too much of the math here, but the reason this trick exists is to greatly increase the numerical stability of the operation</p><p>$$
+\log \sum_i \exp x_i
+$$</p><p>via the identity</p><p>$$
+a + \log \sum_i \exp\left(x_i - a\right)
+$$</p><h2 id=naive-implementations>Naive implementations</h2><p>In <a href=https://julialang.org>Julia</a> we can implement a naive logsumexp with</p><pre><code class=language-julia>logsumexp_naive(X) = log(sum(exp, X))
+</code></pre><p>let&rsquo;s test the numerical accuracy against Julia&rsquo;s <code>BigFloat</code> for some very large numbers</p><pre><code class=language-julia>using Random
+rng = Random.seed!(55215)
+X = 1000 .* rand(rng, 100)
+
+logsumexp_naive(X)
+
+# output
+Inf
+</code></pre><pre><code class=language-julia>logsumexp_naive(big.(X))
+
+# output
+992.4854574035180795285906086509468594208066712019734540787001118090835360846258
+</code></pre><p>Now let&rsquo;s compare that to a version using the shift, which requires 2 passes through the collection <code>X</code>, first to find the maximum and again to accumulate the sum</p><pre><code class=language-julia>function logsumexp_twopass(X)
+    a = maximum(X)
+    return a + log(sum(x -&gt; exp(x - a), X))
+end
+
+logsumexp_twopass(X)
+
+# output
+992.4854574035181
+</code></pre><p>Let&rsquo;s use <a href=https://github.com/JuliaCI/BenchmarkTools.jl><code>BenchmarkTools.jl</code></a> to do some timing tests</p><pre><code class=language-julia>using BenchmarkTools
+@btime logsumexp_naive($X)
+
+# output
+  437.848 ns (0 allocations: 0 bytes)
+Inf
+</code></pre><pre><code class=language-julia>@btime logsumexp_twopass($X)
+
+# output
+  912.282 ns (0 allocations: 0 bytes)
+992.4854574035181
+</code></pre><p>we can see the extra pass over the collection almost exactly <em>doubles</em> our runtime.</p><h2 id=single-pass-streaming-implementation>Single-pass (streaming) implementation</h2><p>From <a href=http://www.nowozin.net/sebastian/blog/streaming-log-sum-exp-computation.html>&ldquo;Streaming Log-sum-exp Computation&rdquo;</a> by <a href=http://www.nowozin.net/sebastian/>Sebastion Nowozin</a>, we can actually find both the <code>maximum</code> and accumulate the sum with a single pass through the collection.</p><pre><code class=language-julia>function logsumexp_onepass(X)
+    a = -Inf
+    r = zero(eltype(X))
+    for x in X
+        if x ≤ a
+            # standard computation
+            r += exp(x - a)
+        else
+            # if new value is higher than current max
+            r *= exp(a - x)
+            r += one(x)
+            a = x
+        end
+    end
+    return a + log(r)
+end
+</code></pre><pre><code class=language-julia>@btime logsumexp_onepass($X)
+
+# output
+  632.657 ns (0 allocations: 0 bytes)
+992.4854574035181
+</code></pre><p>so not <em>quite</em> as fast as the naive implementation, but still faster than the two-pass version.</p><h2 id=extending-to-weighted-sum>Extending to weighted sum</h2><p>The <a href=https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.logsumexp.html>scipy implementation of logsumexp</a> allows performing an extension of the <code>logsumexp</code> algorithm with a weighted sum-</p><p>$$
+\log \sum_i{ w_i \exp x_i}
+$$</p><p>This is straightforward enough to implement using our single pass algorithm above</p><pre><code class=language-julia>function logsumexp_onepass(X, w)
+    a = -Inf
+    r = zero(eltype(X))
+    for (x, wi) in zip(X, w)
+        if x ≤ a
+            # standard computation
+            r += wi * exp(x - a)
+        else
+            # if new value is higher than current max
+            r *= exp(a - x)
+            r += wi
+            a = x
+        end
+    end
+    return a + log(r)
+end
+
+# when w = 1 it should be equivalent to logsumexp
+logsumexp_onepass(X, ones(length(X)))
+
+# output
+992.4854574035181
+</code></pre><pre><code class=language-julia>w = rand(rng, length(X))
+</code></pre><pre><code class=language-julia>@btime logsumexp_onepass($X, $w)
+
+# output
+  777.162 ns (0 allocations: 0 bytes)
+991.6805331462472
+</code></pre><h2 id=whats-missing>What&rsquo;s missing?</h2><p>While the weighted <code>logsumexp</code> function above works for many different types of iterators and arrays, it doesn&rsquo;t support reducing over arbitrary dimensions in a multi-dimensional array-</p><pre><code class=language-julia>function logsumexp_twopass(X, w; dims)
+    a = maximum(X; dims=dims)
+    r = sum(w .* exp.(X .- a); dims=dims)
+    return a .+ log.(r)
+end
+
+logsumexp_twopass([X X], [w w]; dims=1)
+
+# output
+1×2 Matrix{Float64}:
+ 991.681  991.681
+</code></pre><p>unfortunately, this method is <em>quite</em> slow</p><pre><code class=language-julia>@btime logsumexp_twopass($([X X]), $([w w]); dims=1)
+
+# output
+  2.969 μs (7 allocations: 2.16 KiB)
+1×2 Matrix{Float64}:
+ 991.681  991.681
+</code></pre><p>This is ~3 times slower than the multi-dimensional array implementation of <code>logsumexp</code> in <a href=https://github.com/juliastats/LogExpFunctions.jl><code>LogExpFunctions.jl</code></a>, which does not support weights</p><pre><code class=language-julia>using LogExpFunctions
+@btime LogExpFunctions.logsumexp($([X X]); dims=1)
+
+# output
+  1.310 μs (2 allocations: 208 bytes)
+1×2 Matrix{Float64}:
+ 992.485  992.485
+</code></pre><p>I leave an open challenge to any readers who can get an implementation for a weighted <code>logsumexp</code> that matches the quality of the <a href=https://github.com/JuliaStats/LogExpFunctions.jl/blob/master/src/logsumexp.jl><code>logsumexp</code> implementation in <code>LogExpFunctions.jl</code> </a>.</p></div></div></div><script>document.addEventListener('DOMContentLoaded',()=>{hljs.initHighlightingOnLoad()})</script></div></div></main><footer class=pl-scrollbar><div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b"><p class="text-sm text-tertiary-text">&copy; 2021 <a href=https://mileslucas.com/>Miles Lucas</a>
+&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p></div></div></footer></body></html>
