@@ -179,7 +179,7 @@ unfortunately, this method is *quite* slow
  991.681  991.681
 ```
 
-This is ~3 times slower than the multi-dimensional array implementation of `logsumexp` in [`LogExpFunctions.jl`](https://github.com/juliastats/LogExpFunctions.jl), which does not support weights
+This is ~3 times slower than the multi-dimensional array implementation of `logsumexp` in [LogExpFunctions.jl](https://github.com/juliastats/LogExpFunctions.jl), which does not support weights
 ```julia
 using LogExpFunctions
 @btime LogExpFunctions.logsumexp($([X X]); dims=1)
@@ -190,4 +190,4 @@ using LogExpFunctions
  992.485  992.485
 ```
 
-I leave an open challenge to any readers who can get an implementation for a weighted `logsumexp` that matches the quality of the [`logsumexp` implementation in `LogExpFunctions.jl` ](https://github.com/JuliaStats/LogExpFunctions.jl/blob/master/src/logsumexp.jl). The biggest issues with trying to transcribe the implementation is that `LogExpFunctions.jl` levies `reduce`, which doesn't (currently) take multiple array arguments. Neither does `mapslices`, so a custom loop would have to be written over the array indices, as far as I can tell.
+I leave an open challenge to any readers who can get an implementation for a weighted `logsumexp` that matches the quality of the [`logsumexp` implementation in LogExpFunctions.jl ](https://github.com/JuliaStats/LogExpFunctions.jl/blob/master/src/logsumexp.jl). The biggest issues with trying to transcribe the implementation is that LogExpFunctions.jl levies `reduce`, which doesn't (currently) take multiple array arguments. Neither does `mapslices`, so a custom loop would have to be written over the array indices, as far as I can tell.
