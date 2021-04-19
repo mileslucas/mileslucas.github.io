@@ -4,7 +4,7 @@ date: 2021-04-19T00:06:19-05:00
 draft: false
 ---
 
-Recently I've been thinking about the [LogSumExp](https://en.wikipedia.org/wiki/LogSumExp) trick since it is used in the [integration step of nested sampling](). I won't go over too much of the math here, but the reason this trick exists is to greatly increase the numerical stability of the operation 
+Recently I've been thinking about the [LogSumExp](https://en.wikipedia.org/wiki/LogSumExp) trick since it is used in the [integration step of nested sampling](https://github.com/joshspeagle/dynesty/blob/9fc19cfeec17ce3d87ba16c962e6ca59cd21d548/py/dynesty/sampler.py#L431-L433). I won't go over too much of the math here, but the reason this trick exists is to greatly increase the numerical stability of the operation 
 
 $$
 \log \sum_i \exp x_i
