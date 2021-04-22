@@ -111,7 +111,7 @@ julia> m = match(template, "-41:08:16.59")
 RegexMatch("-41:08:16.59", 1="-41", 2="08", 3="16.59")
 ```
 
-you can see how I've grouped our string into three values, degrees, arcminutes, and arcseconds. This can now be parse using Julia's build in string parsing
+you can see how I've grouped our string into three values, degrees, arcminutes, and arcseconds. I've importantly kept the leading "+-" inside the degree group, so we can parse negative angles, too. The strings from our match's capture groups can be parsed into floats using Julia's base utilities
 
 ```julia
 julia> deg = parse(Float64, m.captures[1]);
