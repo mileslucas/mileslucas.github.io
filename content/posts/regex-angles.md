@@ -73,13 +73,16 @@ julia> occursin(template, "41:08:16.59")
 false
 ```
 
-this doesn't quite work how we want, yet. Mostly because we want to parse numbers, not literal `"xx"` and `"xx.x"`. A convient thing we can do is write a template for a generic decimal number and reuse it.
+this doesn't quite work how we want, yet. Mostly because we want to parse numbers, not literal `"xx"` and `"xx.x"`. A convient thing we can do is write a template for a generic decimal number and reuse it. I'll also group the delimiter groups into their own strings for organization
 
 ```julia
 # use raw string to avoid escaping '\' backslashes
 num = raw"\d+\.?\d*"
-# use Regex to allow string interpolation
-template = Regex("[+-]$num[:d°\\s]$num[:m'′\\s]$num[s\"″\\s][NS]")
+d_del = raw"[:d°\s]" # degrees
+m_del = raw"[:m'′\s]" # arcmin
+s_del = "[s\"″\\s]" # arcsec
+# use `Regex`to allow string interpolation
+template = Regex("[+-]$num$d_del$num$m_del$num$s_del[NS]")
 ```
 ```julia
 julia> occursin(template, "41:08:16.59")
@@ -96,7 +99,7 @@ true
 The problem with our regex is that it is too restrictive: for example, the leading "+" or "-" should be optional, but right now it is required to match! We can fix that by appending `"?"` to the groups we want to appear 0 or 1 times.
 
 ```julia
-julia> template = Regex("[+-]?$num[:d°\\s]?$num[:m'′\\s]?$num[s\"″\\s]?[NS]?");
+julia> template = Regex("[+-]?$num$d_del?$num$m_del?$num$s_del?[NS]?");
 
 julia> occursin(template, "41:08:16.59")
 true
@@ -105,7 +108,7 @@ true
 Yay, it works! Unforunately, we can't actually use this for parsing data- merely for string matching. To parse values, we need to use regex capture groups, which use parantheses (`()`)
 
 ```julia
-julia> template = Regex("([+-]?$num)[:d°\\s]?($num)[:m'′\\s]?($num)[s\"″\\s]?[NS]?");
+julia> template = Regex("([+-]?$num)$d_del?($num)$m_del?($num)$s_del?[NS]?");
 
 julia> m = match(template, "-41:08:16.59")
 RegexMatch("-41:08:16.59", 1="-41", 2="08", 3="16.59")
@@ -114,17 +117,17 @@ RegexMatch("-41:08:16.59", 1="-41", 2="08", 3="16.59")
 you can see how I've grouped our string into three values, degrees, arcminutes, and arcseconds. I've importantly kept the leading "+-" inside the degree group, so we can parse negative angles, too. The strings from our match's capture groups can be parsed into floats using Julia's base utilities
 
 ```julia
-julia> deg = parse(Float64, m.captures[1]);
+julia> degs = parse(Float64, m.captures[1]);
 
-julia> min = parse(Float64, m.captures[2]);
+julia> mins = parse(Float64, m.captures[2]);
 
-julia> sec = parse(Float64, m.captures[3]);
+julia> secs = parse(Float64, m.captures[3]);
 
-julia> (deg, min, sec)
+julia> (degs, mins, secs)
 (-41.0, 8.0, 16.59)
 ```
 
-This was essentially the state of string-parsing in the `v0.1` release of AstroAngles.jl, with of course regex matching hour-angle formats and additional utilities for converting between tuples like the `(deg, min, sec)` above and decimal radians, degrees, or hour angles.
+This was essentially the state of string-parsing in the `v0.1` release of AstroAngles.jl, with of course regex matching hour-angle formats and additional utilities for converting between tuples like the `(degs, mins, secs)` above and decimal radians, degrees, or hour angles.
 
 ## Feature parity with astropy
 
@@ -135,7 +138,7 @@ Following up to a [feature request](https://github.com/JuliaAstro/AstroAngles.jl
 To support the cardinal directions, I needed to add an optional capture group, combining two syntaxes used before - `( )?`
 
 ```julia
-template = Regex("([+-]?$num)[:d°\\s]?($num)[:m'′\\s]?($num)[s\"″\\s]?(N|S)?")
+template = Regex("([+-]?$num)$d_del?($num)$m_del?($num)$s_del?(N|S)?")
 ```
 
 there's a slight difference in how to represent *or* in capture groups (`()`) than letter groups (`[]`). In capture groups `(N|S)?` means "literal 'N' *or* literal 'S' either 0 or 1 times". We can see how this affects our capture groups
@@ -155,7 +158,7 @@ for our parsing code, all we have to do is check if the direction is "S" and fli
 Finally, how can we optionally support the minutes and seconds fields? If we just make them optional with `?`, we'll just have to change the parsing code downstream to check for `nothing`
 
 ```julia
-julia> template = Regex("([+-]?$num)[:d°\\s]?($num)?[:m'′\\s]?($num)?[s\"″\\s]?(N|S)?");
+julia> template = Regex("([+-]?$num)$d_del?($num)?$m_del?($num)?$s_del?(N|S)?");
 
 julia> match(template, "10.203d")
 RegexMatch("10.203d", 1="10.203", 2=nothing, 3=nothing, 4=nothing)
