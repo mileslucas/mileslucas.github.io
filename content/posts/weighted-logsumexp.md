@@ -1,6 +1,7 @@
 ---
 title: "Developing a Single-Pass Weighted LogSumExp Function"
 date: 2021-04-19T00:06:19-05:00
+tags: [julia, math, statistics]
 draft: false
 ---
 
