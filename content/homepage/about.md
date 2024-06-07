@@ -2,14 +2,11 @@
 title: Miles Lucas
 draft: false
 role: Ph.D. Student
-avatar: images/logo.png
+avatar: images/self.jpeg
 organization:
   name: Institute for Astronomy
   url: http://www.ifa.hawaii.edu
 social:
-  - icon: twitter
-    iconPack: fab
-    url: https://twitter.com/mileslucas_
   - icon: github
     iconPack: fab
     url: https://github.com/mileslucas
@@ -42,12 +39,23 @@ widget:
     attachment: 
 ---
 
+[Link to CV](CV.pdf)
+
 ## About Me
 
-I am originally from Denver, Colorado, but spent most of my life growing up in Eastern Iowa. I completed my undergraduate degree in physics with minors in astronomy and computer science at Iowa State University in 2019. Currently I am a Ph.D. student at the Institute for Astronomy at University of Hawai'i at Mānoa.
+I was born in Denver and grew up in Eastern Iowa. I completed my undergraduate degree in physics with minors in astronomy and computer science at Iowa State University in 2019. Currently I am a Ph.D. student at the Institute for Astronomy at University of Hawai'i at Mānoa. I earned my M.S. in astronomy in 2021. **I am currently finishing my Ph.D. project and am actively seeking post-doctoral opportunities.**
 
 ## Research Interests
 
-I enjoy using programming to solve astronomical problems and provide tools for other astronomers. Check out some of the code I've written at in my [projects](/projects/). Some of my research interests include stellar astrophysics, Bayesian analysis, and machine learning. I have recently become very interested in high-contrast imaging (HCI), which pushes the limits of our best telescopes and statistical methods to image planets around other stars.
 
-Outside of research, I enjoy drumming, hiking, camping, playing video games, and photography. You can see a selection of some of my favorite photos in my [portfolio](https://portfolio.mileslucas.com/). I've even been featured in NASA's Astronomy Photo of the Day (APOD) for [this star trails photo](https://apod.nasa.gov/apod/ap180713.html) at the Very Large Array (VLA).
+### High-contrast Imaging
+
+My Ph.D. research revolved around upgrading the visible-light high-contrast polarimeter [VAMPIRES](https://www.naoj.org/Projects/SCEXAO/scexaoWEB/030openuse.web/040vampires.web/indexm.html). I find the intersection of optics, systems engineering, programming, and data management interesting and fulfilling, and I specialize in polarimetric instrumentation. Using polarimetry is a highly effective tool for studying circumstellar disks, and I've developed observational techniques for simultaneous polarimetric differential imaging with multiple high-contrast instruments fed by SCExAO.
+
+### Programming
+I enjoy using programming to solve astronomical problems and provide tools for other astronomers. I specialize in image processing and data processing pipelines. I am proficient in Python and Julia, and have contributed many open-source packages in both languages. 
+
+
+## Personal Interests
+
+Outside of research, I enjoy cooking, baking, photography, astrophotography, climbing, hiking, biking, and drumming. You can see a selection of some of my favorite photos in my [portfolio](https://portfolio.mileslucas.com/). I've been featured in NASA's Astronomy Photo of the Day (APOD) for [this star trails photo](https://apod.nasa.gov/apod/ap180713.html) I took during a summer research internship at the Very Large Array (VLA) in Socorro, New Mexico.
