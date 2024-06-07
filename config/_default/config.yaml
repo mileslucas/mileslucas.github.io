@@ -4,7 +4,7 @@ title: Miles Lucas
 # Comment when installing using Hugo Modules
 theme: eureka
 # Uncomment when installing using Hugo Modules
-# theme: github.com/wangchucheng/hugo-eureka
+# theme: wangchucheng/hugo-eureka
 
 paginate: 3
 copyright: >
@@ -39,4 +39,4 @@ taxonomies:
   series: series
 
 build:
-  useResourceCacheWhen: always
+  useResourceCacheWhen: fallback
